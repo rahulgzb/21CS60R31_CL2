@@ -1,0 +1,4 @@
+
+python run_infer.py --gpu=0 --nr_types=0 --model_path=./logs/01/net_epoch=50.tar --model_mode=original -
+-batch_size=8 tile --input_dir=./kumar/test_same/Images --output_dir=./output
+python compute_stats.py --mode=instance --pred_dir=./output/mat --true_dir=./kumar/test_same/Labels
