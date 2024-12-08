@@ -12,19 +12,22 @@ class Config(object):
 
     def __init__(self):
         self.seed = 10
+
         self.logging = True
+
+        # turn on debug flag to trace some parallel processing problems more easily
         self.debug = False
 
-        model_name = "segmentation_net"
+        model_name = "hovernet"
         model_mode = "original" # choose either `original` or `fast`
 
         if model_mode not in ["original", "fast"]:
             raise Exception("Must use either `original` or `fast` as model mode")
 
-        nr_type = None # number of nuclear types (including background)
+        nr_type = 5 # number of nuclear types (including background)
 
         # whether to predict the nuclear type, availability depending on dataset!
-        self.type_classification = False
+        self.type_classification = True
 
         # shape information - 
         # below config is for original mode. 
@@ -41,15 +44,15 @@ class Config(object):
             if act_shape != [256,256] or out_shape != [164,164]:
                 raise Exception("If using `fast` mode, input shape must be [256,256] and output shape must be [164,164]")
 
-        self.dataset_name = "kumar" # extracts dataset info from dataset.py
+        self.dataset_name = "consep" # extracts dataset info from dataset.py
         self.log_dir = "logs/" # where checkpoints will be saved
 
         # paths to training and validation patches
         self.train_dir_list = [
-            "./dataset/training_data/consep/consep/train/540x540_164x164/"
+            "train_patches_path"
         ]
         self.valid_dir_list = [
-            "./dataset/training_data/consep/consep/valid/540x540_164x164/"
+            "valid_patches_path"
         ]
 
         self.shape_info = {
